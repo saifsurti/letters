@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Universe Where You Exist - For Farwah</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: shoot 3s linear infinite;
+        }
+        
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .card-container {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            width: 100%;
+            perspective: 1000px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            padding: 70px 60px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .card:hover::before {
+            left: 100%;
+        }
+        
+        .card:hover {
+            transform: rotateY(3deg) rotateX(3deg) scale(1.02);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+        }
+        
+        .date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .dedication {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #764ba2;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.4)); }
+            to { filter: drop-shadow(0 0 25px rgba(118, 75, 162, 0.6)); }
+        }
+        
+        .poem {
+            line-height: 1.9;
+            color: #2d3748;
+            font-size: 1.15rem;
+            text-align: left;
+            position: relative;
+        }
+        
+        .stanza {
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+            transition: all 0.3s ease;
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .stanza:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateX(10px);
+            box-shadow: -5px 0 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .stanza:nth-child(1) { animation-delay: 0.3s; }
+        .stanza:nth-child(2) { animation-delay: 0.6s; }
+        .stanza:nth-child(3) { animation-delay: 0.9s; }
+        .stanza:nth-child(4) { animation-delay: 1.2s; }
+        .stanza:nth-child(5) { animation-delay: 1.5s; }
+        .stanza:nth-child(6) { animation-delay: 1.8s; }
+        .stanza:nth-child(7) { animation-delay: 2.1s; }
+        .stanza:nth-child(8) { animation-delay: 2.4s; }
+        .stanza:nth-child(9) { animation-delay: 2.7s; }
+        .stanza:nth-child(10) { animation-delay: 3.0s; }
+        .stanza:nth-child(11) { animation-delay: 3.3s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .signature {
+            margin-top: 50px;
+            text-align: center;
+            font-style: italic;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .heart-float {
+            position: absolute;
+            font-size: 25px;
+            pointer-events: none;
+            animation: heartFloat 8s linear infinite;
+        }
+        
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(90deg) scale(1.1); }
+            50% { transform: translateY(-30px) rotate(180deg) scale(0.9); }
+            75% { transform: translateY(-15px) rotate(270deg) scale(1.1); }
+        }
+        
+
+        
+        .music-note {
+            position: absolute;
+            color: #667eea;
+            font-size: 16px;
+            pointer-events: none;
+            animation: musicFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes musicFloat {
+            0%, 100% { transform: translateY(0px) opacity(0.7); }
+            50% { transform: translateY(-20px) opacity(1); }
+        }
+        
+        .love-pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(231, 76, 60, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        
+        .sparkle-trail {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f093fb;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleTrail 2s ease-out forwards;
+        }
+        
+        @keyframes sparkleTrail {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                padding: 50px 35px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 2.8rem;
+            }
+            
+            .dedication {
+                font-size: 1.8rem;
+            }
+            
+            .poem {
+                font-size: 1.05rem;
+            }
+            
+
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="card-container">
+        <div class="card" id="poemCard">
+            <div class="floating-elements">
+                <div class="floating-heart" style="top: 5%; left: 3%; animation-delay: 0s; color: rgba(231, 76, 60, 0.4);">💖</div>
+                <div class="floating-heart" style="top: 15%; right: 8%; animation-delay: 2s; color: rgba(102, 126, 234, 0.5);">✨</div>
+                <div class="floating-heart" style="bottom: 25%; left: 5%; animation-delay: 4s; color: rgba(240, 147, 251, 0.4);">💫</div>
+                <div class="floating-heart" style="bottom: 8%; right: 3%; animation-delay: 6s; color: rgba(118, 75, 162, 0.4);">🌙</div>
+                <div class="floating-heart" style="top: 40%; left: 90%; animation-delay: 8s; color: rgba(231, 76, 60, 0.3);">💕</div>
+                <div class="floating-heart" style="top: 60%; left: 2%; animation-delay: 3s; color: rgba(102, 126, 234, 0.4);">🌟</div>
+            </div>
+            
+            <div class="date">27th July 2025</div>
+            <div class="dedication">My Jaan, My Farwah, My Love, My Universe</div>
+            <h1 class="title">"The Universe Where You Exist"</h1>
+            
+            <div class="poem">
+                <div class="stanza">I don't remember when the stars stopped being enough<br>because your eyes started holding galaxies instead.<br>Somewhere between your laughter and the way your voice says my name—<br>I unraveled. And I didn't mind.</div>
+                
+                <div class="stanza">You slipped into my life like sunlight on winter skin,<br>slow and soft and soul-warming—<br>and now I ache in places that never knew how to feel before you.</div>
+                
+                <div class="stanza">You've laced yourself through my every day,<br>in stories we whisper in quiet corners,<br>in the giggles that linger like perfume,<br>in how we turn memories into music,<br>and silences into home.</div>
+                
+                <div class="stanza">I've watched your blush bloom like a rose pressed between pages of forever—<br>and I swear, love, I'd write every poem again<br>just to see it once more.</div>
+                
+                <div class="stanza">You've become the rhythm I breathe to,<br>the reason time feels kind,<br>the reason I can no longer imagine a world<br>that spins without you in it.</div>
+                
+                <div class="stanza">You are my morning softness,<br>my midnight colour,<br>the delicate gravity that keeps my wild heart tethered.</div>
+                
+                <div class="stanza">And if the world ever forgets what love looks like,<br>I'll point to you—<br>hair untied, eyes gleaming like emeralds submerged in ocean tides,<br>laughter like thunder wrapped in honey,<br>and I'll say—<br>"This. This is how love survives."</div>
+                
+                <div class="stanza">Because I do not just love you. I belong to you.<br>In every breath. In every quiet wish.<br>In every life I'd ever choose—<br>I would always find my way to the girl, to you,<br>whose soul fit mine like it had been waiting.</div>
+                
+                <div class="stanza">So let time pass, let stars fade,<br>let the universe spin out of ink—<br>but know this:</div>
+                
+                <div class="stanza">I will still be here, your poet, your admirer, your home.</div>
+                
+                <div class="stanza">Forever isn't long enough, but it's where I'll start.</div>
+                
+                <div class="signature">Yours, till this universe forgets to breathe.</div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <script>
+        // Create enhanced stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            
+            // Regular twinkling stars
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 4 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+            
+            // Shooting stars
+            setInterval(createShootingStar, 4000);
+        }
+        
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.getElementById('stars').appendChild(star);
+            
+            setTimeout(() => star.remove(), 3000);
+        }
+        
+        // Enhanced floating hearts
+        function createFloatingHeart() {
+            const hearts = ['💕', '💖', '💗', '💝', '💘', '❤️', '💜', '💙'];
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.color = `hsl(${Math.random() * 60 + 300}, 70%, 60%)`;
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+        
+        // Heart burst effect
+        function createHeartBurst() {
+            const card = document.getElementById('poemCard');
+            const rect = card.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💕';
+                    heart.style.position = 'fixed';
+                    heart.style.left = centerX + 'px';
+                    heart.style.top = centerY + 'px';
+                    heart.style.fontSize = '20px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '2000';
+                    
+                    const angle = (i / 20) * 2 * Math.PI;
+                    const distance = 100 + Math.random() * 100;
+                    const endX = centerX + Math.cos(angle) * distance;
+                    const endY = centerY + Math.sin(angle) * distance;
+                    
+                    heart.style.transition = 'all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.style.left = endX + 'px';
+                        heart.style.top = endY + 'px';
+                        heart.style.opacity = '0';
+                        heart.style.transform = 'scale(0.5) rotate(360deg)';
+                    }, 50);
+                    
+                    setTimeout(() => heart.remove(), 2000);
+                }, i * 50);
+            }
+        }
+        
+        // Star shower effect
+        function createStarShower() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const star = document.createElement('div');
+                    star.innerHTML = '✨';
+                    star.style.position = 'fixed';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = '-20px';
+                    star.style.fontSize = Math.random() * 10 + 15 + 'px';
+                    star.style.pointerEvents = 'none';
+                    star.style.zIndex = '2000';
+                    star.style.animation = 'heartFloat 3s linear forwards';
+                    document.body.appendChild(star);
+                    
+                    setTimeout(() => star.remove(), 3000);
+                }, i * 100);
+            }
+        }
+        
+        // Enhanced card interactions
+        const card = document.getElementById('poemCard');
+        const stanzas = document.querySelectorAll('.stanza');
+        
+        card.addEventListener('click', function() {
+            this.style.transform = 'rotateY(8deg) rotateX(8deg) scale(1.03)';
+            this.style.boxShadow = '0 50px 120px rgba(102, 126, 234, 0.4)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, 500);
+            
+            createHeartBurst();
+        });
+        
+        // Individual stanza interactions
+        stanzas.forEach((stanza, index) => {
+            stanza.addEventListener('mouseenter', function() {
+                // Create subtle sparkles around the stanza
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'sparkle-trail';
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        this.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 2000);
+                    }, i * 200);
+                }
+            });
+            
+            stanza.addEventListener('click', function() {
+                // Create focused heart effect for clicked stanza
+                const rect = this.getBoundingClientRect();
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '💖';
+                        heart.style.position = 'fixed';
+                        heart.style.left = rect.right + 'px';
+                        heart.style.top = rect.top + (rect.height / 2) + 'px';
+                        heart.style.fontSize = '16px';
+                        heart.style.pointerEvents = 'none';
+                        heart.style.zIndex = '2000';
+                        heart.style.animation = 'heartFloat 2s ease-out forwards';
+                        document.body.appendChild(heart);
+                        
+                        setTimeout(() => heart.remove(), 2000);
+                    }, i * 100);
+                }
+            });
+        });
+        
+        // Share functionality
+        function sharePoem() {
+            const text = "💕 'The Universe Where You Exist' - A love poem made specially for Farwah 💕";
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'The Universe Where You Exist',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    const button = event.target;
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '📋 Copied!';
+                    button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                    }, 2000);
+                });
+            }
+        }
+        
+        // Enhanced mouse interactions
+        let mouseTrail = [];
+        document.addEventListener('mousemove', function(e) {
+            mouseTrail.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+            
+            // Keep only recent positions
+            mouseTrail = mouseTrail.filter(pos => Date.now() - pos.time < 1000);
+            
+            if (Math.random() < 0.05) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-trail';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 2000);
+            }
+        });
+        
+        // Initialize everything
+        createStars();
+        
+        // Continuous magical effects
+        setInterval(createFloatingHeart, 2500);
+        
+        // Add music notes occasionally
+        setInterval(() => {
+            if (Math.random() < 0.3) {
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.innerHTML = ['♪', '♫', '♬', '♩'][Math.floor(Math.random() * 4)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.top = Math.random() * 100 + '%';
+                document.body.appendChild(note);
+                
+                setTimeout(() => note.remove(), 4000);
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
